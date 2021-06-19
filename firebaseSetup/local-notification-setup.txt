@@ -1,0 +1,34 @@
+1. buka git https://github.com/zo0r/react-native-push-notification
+2. pada folder example, copy isi code file NotificationHandler.js
+3. buat file baru di project kita dengan nama NotificationHandler.js di root project (sejajar App.js), pastekan code nya yang telah dicopy tadi
+4. kembali ke github, pada folder example copy isi code file NotifService.js
+5. buat file baru di project kita dengan nama NotifService.js di root project (sejajar App.js), pastekan code nya yang telah dicopy tadi
+6. kembali ke github lagi, pada folder example copy isi code file App.js
+7. replace App.js di project kita dengan App.js yang di copy di github tadi
+
+Mengubah App.js dari class component ke functional component
+1. hapus constructor nya
+2. buat useState registerToken (string kosong) dan fcmRegistered (false):
+const [registerToken, setRegisterToken] = useState('')
+const [fcmRegistered, setFcmRegistered] = useState(false)
+
+3. hapus state yang ada this nya, jika ada fungsi yang menggunakan bind hapus bind nya dan juga this nya:
+onPress={() => {
+  notif.checkPermission(handlePerm());
+}}
+
+4. tambahkan function baru berikut:
+const onRegister = (token) => {
+  setRegisterToken(token.token)
+  setFcmRegistered(true)
+}
+
+const onNotif = (notif) => {
+  Alert.alert(notif.title, notif.message)
+}
+
+const notif = new NotifService(onRegister, onNotif)
+
+const handlePerm = (perms) => {
+  Alert.alert('Permissions', JSON.stringify(perms))
+}
