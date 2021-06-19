@@ -1,0 +1,49 @@
+npm install --save react-native-push-notification
+
+1. login firebase
+2. add project, matikan enable google analytic nya
+3. pada dashboard Get started, pilih icon android yang dibawahnya
+4. pada form register app, isi nama android package sama dengan nama project kita:
+-buka project, pilih folder android - app - build.gradle
+-scroll kebawah dan cari applicationId di defaultConfig
+defaultConfig {
+  applicationId "com.pushnotificationtutorial"
+}
+
+5. download google-service.json, setelah di download pindahkan file download ke project kita:
+-pilih folder android - app lalu pastekan di folder app
+
+6. pastekan code yang ada di registrasi firebase ke file android - build.gradle
+buildscript {
+  repositories {
+    // Check that you have the following line (if not, add it):
+    google()  // Google's Maven repository
+  }
+  dependencies {
+    ...
+    // Add this line
+    classpath 'com.google.gms:google-services:4.3.8'
+  }
+}
+
+allprojects {
+  ...
+  repositories {
+    // Check that you have the following line (if not, add it):
+    google()  // Google's Maven repository
+    ...
+  }
+}
+
+7. pasetekan juga code yang ada di registrasi firebase ke file android - app - build.gradle
+apply plugin: 'com.android.application'
+// Add this line
+apply plugin: 'com.google.gms.google-services'
+
+dependencies {
+  // Import the Firebase BoM
+  implementation platform('com.google.firebase:firebase-bom:28.1.0')
+
+  // Add the dependencies for the desired Firebase products
+  // https://firebase.google.com/docs/android/setup#available-libraries
+}
