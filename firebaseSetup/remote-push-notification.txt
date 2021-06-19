@@ -1,0 +1,29 @@
+// via firebase
+1. buka firebase, pilih menu Engage - Cloud Messaging
+2. isi form untuk menampilkan push notification:
+-title: Hello
+-text: Muhammad Ikbal
+3. pilih target user nya:
+com.pushnotificationtutorial
+
+// via postman
+1. buka postman
+2. klik menu import - raw text
+3. paste code nya lalu ganti server key nya, lihat di firebase:
+-klik icon setting - pilih project setting
+-pada menu cloud messaging, copy server key nya
+-copy token nya yang ada di terminal, lalu pastekan di "to":
+curl --location --request POST 'https://fcm.googleapis.com/fcm/send' \
+--header 'Authorization: key=SERVER_KEY_DI_FIREBASE' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "to": "TOKEN_DI_TERMINAL",
+  "priority": "high",
+  "soundName": "default",
+  "notification": {
+    "title": "Halo Ikbal",
+    "body": "Ini adalah FCM melalui postman"
+  }
+}'
+4. klik continue, lalu import
+5. maka akan meng-generate request baru di postman dengan method POST
